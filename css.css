@@ -1,0 +1,14 @@
+table, tr, td {
+    border:solid black 2px;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 100px;
+}
+tr:first-child{
+    font-weight: bold;
+    background-color: blueviolet;
+}
+
+tr:not(:first-child):hover{
+    background-color: darkgrey;
+}
