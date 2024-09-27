@@ -1,14 +1,23 @@
-table, tr, td {
+table, tr, td, th {
     border:solid black 2px;
     border-collapse: collapse;
     text-align: center;
     font-size: 100px;
 }
-tr:first-child{
+table thead tr{
     font-weight: bold;
     background-color: blueviolet;
 }
 
-tr:not(:first-child):hover{
+tr:nth-child(2n){
+    background-color: black;
+    color: aliceblue;
+}
+
+table tbody tr:not(tr:nth-child(2n)):hover{
     background-color: darkgrey;
+}
+
+table tbody tr:nth-child(2n):hover{
+    background-color:darkslategrey;
 }
