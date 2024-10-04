@@ -2,44 +2,67 @@ const array = [
     {
         firstname1: 'Géza',
         firstname2: 'Ferenc',
-        lastname: 'Kocsis'
+        lastname: 'Kocsis',
+        married: true,
+        pet: 'kutya'
     },
     {
         firstname1: 'Mária',
         firstname2: 'Júlia',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: false,
+        pet: 'macska'
     },
     {
         firstname1: 'Ferenc',
-        lastname: 'Balogh'
+        lastname: 'Balogh',
+        married: false,
+        pet: 'teknős'
     },
     {
         firstname1: 'Gábor',
         firstname2: 'Attila',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: true,
+        pet: 'macska'
     },
 ]
 feltolt();
+
 function feltolt(){
     const table=document.createElement("table");
     const thead=document.createElement("thead");
     const tbody=document.createElement("tbody");
-    const tr0=document.createElement("tr");
+    const tr1=document.createElement("tr");
     const th=document.createElement("th");
+    const th1=document.createElement("th");
     const th2=document.createElement("th");
+    const th3=document.createElement("th");
     
     document.body.appendChild(table);
     table.appendChild(thead);
     table.appendChild(tbody);
-    thead.appendChild(tr0);
-    tr0.appendChild(th);
-    tr0.appendChild(th2)
+    thead.appendChild(tr1);
+    tr1.appendChild(th);
+    tr1.appendChild(th1);
+    tr1.appendChild(th2);
+    tr1.appendChild(th3);
     th.innerHTML="Vezetéknév";
-    th2.colSpan="2";
-    th2.innerHTML="Keresztnév";
+    th1.colSpan="2";
+    th1.innerHTML="Keresztnév";
+    th2.innerHTML="Házas";
+    th3.innerHTML="Állat";
 
     for(const person of array){
         let tr=document.createElement("tr")
+        tr.addEventListener("click", function(e){
+            const selectedRow=tbody.querySelector(".selected");
+            e.currentTarget.classList.add("selected");
+            if(selectedRow != undefined){
+                selectedRow.classList.remove("selected");
+            }
+            console.log("click")
+        })
         tbody.appendChild(tr);
         let td=document.createElement("td")
         tr.appendChild(td);
@@ -55,5 +78,11 @@ function feltolt(){
         }else{
             td1.colSpan=2
         }
+        let td3=document.createElement("td")
+        tr.appendChild(td3);
+        td3.innerHTML=person.married?"igen":"nem";
+        let td4=document.createElement("td")
+        tr.appendChild(td4);
+        td4.innerHTML=person.pet;
     }
 }

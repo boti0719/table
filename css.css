@@ -2,7 +2,7 @@ table, tr, td, th {
     border:solid black 2px;
     border-collapse: collapse;
     text-align: center;
-    font-size: 100px;
+    font-size: 50px;
 }
 table thead tr{
     font-weight: bold;
@@ -14,10 +14,18 @@ tr:nth-child(2n){
     color: aliceblue;
 }
 
-table tbody tr:not(tr:nth-child(2n)):hover{
+table tbody tr:not(tr:nth-child(2n)):not(.selected):hover{
     background-color: darkgrey;
 }
 
-table tbody tr:nth-child(2n):hover{
+table tbody tr:nth-child(2n):not(.selected):hover{
     background-color:darkslategrey;
+}
+
+table tbody .selected {
+    background-color: darkred;
+}
+
+table tbody .selected:hover {
+    background-color:firebrick;
 }
