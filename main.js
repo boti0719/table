@@ -27,7 +27,8 @@ const array = [
         pet: 'macska'
     },
 ]
-feltolt();
+//feltolt();
+formtThings();
 
 function feltolt(){
     const table=document.createElement("table");
@@ -86,3 +87,18 @@ function feltolt(){
         td4.innerHTML=person.pet;
     }
 }
+function formtThings(){
+        const form=document.getElementById("form");
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+            array.push({
+                lastname: document.getElementById("lastname").value,
+                firstname1: document.getElementById("firstname1").value,
+                firstname2: document.getElementById("firstname2").value,
+                married: document.getElementById("married").checked,
+                pet: document.getElementById("pet").value
+
+            })
+            feltolt();
+        })
+    }
