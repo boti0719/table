@@ -29,3 +29,7 @@ table tbody .selected {
 table tbody .selected:hover {
     background-color:firebrick;
 }
+
+.error{
+    color: red;
+}

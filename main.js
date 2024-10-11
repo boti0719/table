@@ -29,9 +29,14 @@ const array = [
 ]
 //feltolt();
 formtThings();
-
 function feltolt(){
-    const table=document.createElement("table");
+    let table;
+    if(document.getElementById("tab")!==null){
+        document.getElementById("tab").innerHTML=null;
+        table=document.getElementById("tab")
+    }else{
+        table=document.createElement("table");
+    }
     const thead=document.createElement("thead");
     const tbody=document.createElement("tbody");
     const tr1=document.createElement("tr");
@@ -39,7 +44,7 @@ function feltolt(){
     const th1=document.createElement("th");
     const th2=document.createElement("th");
     const th3=document.createElement("th");
-    
+    table.setAttribute("id", "tab")
     document.body.appendChild(table);
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -52,8 +57,7 @@ function feltolt(){
     th1.colSpan="2";
     th1.innerHTML="Keresztnév";
     th2.innerHTML="Házas";
-    th3.innerHTML="Állat";
-
+    th3.innerHTML="Állat";        
     for(const person of array){
         let tr=document.createElement("tr")
         tr.addEventListener("click", function(e){
@@ -68,16 +72,15 @@ function feltolt(){
         let td=document.createElement("td")
         tr.appendChild(td);
         td.innerHTML=person.lastname
-        
         let td1=document.createElement("td")
         tr.appendChild(td1);
         td1.innerHTML=person.firstname1
-        if(person.firstname2!==undefined){
-            let td2=document.createElement("td")
-            tr.appendChild(td2);
-            td2.innerHTML=person.firstname2
+        if(person.firstname2==undefined || person.firstname2==""){
+            td1.colSpan=2;
         }else{
-            td1.colSpan=2
+            let td2=document.createElement("td");
+            tr.appendChild(td2);
+            td2.innerHTML=person.firstname2;
         }
         let td3=document.createElement("td")
         tr.appendChild(td3);
@@ -85,20 +88,39 @@ function feltolt(){
         let td4=document.createElement("td")
         tr.appendChild(td4);
         td4.innerHTML=person.pet;
+        
     }
+}
+function validate(lastname, firstname1, pet){
+    let b=true
+    for(const err of document.querySelectorAll(".error"))
+        err.innerHTML="";
+    if(document.getElementById("lastname").value===""){
+        lastname.parentElement.querySelector(".error").innerHTML="A vezeték név kötelező!"
+        b=false;
+    }if(document.getElementById("firstname1").value===""){
+        firstname1.parentElement.querySelector(".error").innerHTML="Az első keresztnév kötelező!"
+        b=false;
+    }if(document.getElementById("pet").value===""){
+        pet.parentElement.querySelector(".error").innerHTML="A házi állat kötelező!"
+        b=false;
+    }
+    return b;
 }
 function formtThings(){
         const form=document.getElementById("form");
         form.addEventListener("submit", function(e){
             e.preventDefault();
-            array.push({
-                lastname: document.getElementById("lastname").value,
-                firstname1: document.getElementById("firstname1").value,
-                firstname2: document.getElementById("firstname2").value,
-                married: document.getElementById("married").checked,
-                pet: document.getElementById("pet").value
-
-            })
+            if(validate(document.getElementById("lastname"), document.getElementById("firstname1"), document.getElementById("pet"))){
+                array.push({
+                    lastname: document.getElementById("lastname").value,
+                    firstname1: document.getElementById("firstname1").value,
+                    firstname2: document.getElementById("firstname2").value===""?undefined:document.getElementById("firstname2").value,
+                    married: document.getElementById("married").checked,
+                    pet: document.getElementById("pet").value
+                })
+                console.log(array);
+            }
             feltolt();
         })
     }
