@@ -27,7 +27,7 @@ const array = [
         pet: 'macska'
     },
 ]
-//feltolt();
+feltolt();
 formtThings();
 function feltolt(){
     let table;
