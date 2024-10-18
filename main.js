@@ -37,27 +37,18 @@ function feltolt(){
     }else{
         table=document.createElement("table");
     }
-    const thead=document.createElement("thead");
-    const tbody=document.createElement("tbody");
-    const tr1=document.createElement("tr");
-    const th=document.createElement("th");
-    const th1=document.createElement("th");
-    const th2=document.createElement("th");
-    const th3=document.createElement("th");
     table.setAttribute("id", "tab");
-    document.body.appendChild(table);
+    const thead=document.createElement("thead");
     table.appendChild(thead);
+    const tbody=document.createElement("tbody");
     table.appendChild(tbody);
+    const tr1=document.createElement("tr");
     thead.appendChild(tr1);
-    tr1.appendChild(th);
-    tr1.appendChild(th1);
-    tr1.appendChild(th2);
-    tr1.appendChild(th3);
-    th.innerHTML="Vezetéknév";
-    th1.colSpan="2";
-    th1.innerHTML="Keresztnév";
-    th2.innerHTML="Házas";
-    th3.innerHTML="Állat";        
+    cellCreate(tr1, "th", "Vezetéknév");
+    cellCreate(tr1, "th", "Keresztnév").colSpan="2";
+    cellCreate(tr1, "th", "Házas");
+    cellCreate(tr1, "th", "Állat");
+    document.body.appendChild(table);
     for(const person of array){
         let tr=document.createElement("tr");
         tbody.appendChild(tr);
@@ -69,27 +60,29 @@ function feltolt(){
             }
             console.log("click")
         })
-        let td=document.createElement("td");
-        tr.appendChild(td);
-        td.innerHTML=person.lastname;
-        let td1=document.createElement("td");
-        tr.appendChild(td1);
-        td1.innerHTML=person.firstname1;
+        cellCreate(tr, "td", person.lastname);
         if(person.firstname2==undefined || person.firstname2==""){
-            td1.colSpan=2;
+            cellCreate(tr, "td", person.firstname1).colSpan=2;
         }else{
-            let td2=document.createElement("td");
-            tr.appendChild(td2);
-            td2.innerHTML=person.firstname2;
+            cellCreate(tr, "td", person.firstname1);
+            cellCreate(tr, "td", person.firstname2);
         }
-        let td3=document.createElement("td");
-        tr.appendChild(td3);
-        td3.innerHTML=person.married?"igen":"nem";
-        let td4=document.createElement("td");
-        tr.appendChild(td4);
-        td4.innerHTML=person.pet;
-        
+        cellCreate(tr, "td", person.married?"igen":"nem");
+        cellCreate(tr, "td", person.pet);
     }
+}
+/**
+ * 
+ * @param {HTMLTableRowElement} parent 
+ * @param {"td"|"th"} elemtType 
+ * @param {string} text 
+ * @returns {HTMLTableCellElement}
+ */
+function cellCreate(parent, elemtType, text){
+    const elem=document.createElement(elemtType);
+    elem.innerHTML=text;
+    parent.appendChild(elem);
+    return elem;
 }
 function validate(lastname, firstname1, pet){
     let b=true;
