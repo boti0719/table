@@ -44,7 +44,7 @@ function feltolt(){
     const th1=document.createElement("th");
     const th2=document.createElement("th");
     const th3=document.createElement("th");
-    table.setAttribute("id", "tab")
+    table.setAttribute("id", "tab");
     document.body.appendChild(table);
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -59,7 +59,8 @@ function feltolt(){
     th2.innerHTML="Házas";
     th3.innerHTML="Állat";        
     for(const person of array){
-        let tr=document.createElement("tr")
+        let tr=document.createElement("tr");
+        tbody.appendChild(tr);
         tr.addEventListener("click", function(e){
             const selectedRow=tbody.querySelector(".selected");
             e.currentTarget.classList.add("selected");
@@ -68,13 +69,12 @@ function feltolt(){
             }
             console.log("click")
         })
-        tbody.appendChild(tr);
-        let td=document.createElement("td")
+        let td=document.createElement("td");
         tr.appendChild(td);
-        td.innerHTML=person.lastname
-        let td1=document.createElement("td")
+        td.innerHTML=person.lastname;
+        let td1=document.createElement("td");
         tr.appendChild(td1);
-        td1.innerHTML=person.firstname1
+        td1.innerHTML=person.firstname1;
         if(person.firstname2==undefined || person.firstname2==""){
             td1.colSpan=2;
         }else{
@@ -82,27 +82,27 @@ function feltolt(){
             tr.appendChild(td2);
             td2.innerHTML=person.firstname2;
         }
-        let td3=document.createElement("td")
+        let td3=document.createElement("td");
         tr.appendChild(td3);
         td3.innerHTML=person.married?"igen":"nem";
-        let td4=document.createElement("td")
+        let td4=document.createElement("td");
         tr.appendChild(td4);
         td4.innerHTML=person.pet;
         
     }
 }
 function validate(lastname, firstname1, pet){
-    let b=true
+    let b=true;
     for(const err of document.querySelectorAll(".error"))
         err.innerHTML="";
     if(document.getElementById("lastname").value===""){
-        lastname.parentElement.querySelector(".error").innerHTML="A vezeték név kötelező!"
+        lastname.parentElement.querySelector(".error").innerHTML="A vezeték név kötelező!";
         b=false;
     }if(document.getElementById("firstname1").value===""){
-        firstname1.parentElement.querySelector(".error").innerHTML="Az első keresztnév kötelező!"
+        firstname1.parentElement.querySelector(".error").innerHTML="Az első keresztnév kötelező!";
         b=false;
     }if(document.getElementById("pet").value===""){
-        pet.parentElement.querySelector(".error").innerHTML="A házi állat kötelező!"
+        pet.parentElement.querySelector(".error").innerHTML="A házi állat kötelező!";
         b=false;
     }
     return b;
