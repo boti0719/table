@@ -47,7 +47,7 @@ function cellCreate(parent, elemtType, text){
     return elem;
 }
 /**
- * 
+ * @param {string|HTMLTableElement} parent
  * @param {string} elemtId 
  * @param {string} elemtType 
  */
