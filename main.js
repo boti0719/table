@@ -72,7 +72,6 @@ function feltolt(){
     }
 }
 /**
- * 
  * @param {HTMLTableRowElement} parent 
  * @param {"td"|"th"} elemtType 
  * @param {string} text 
@@ -101,19 +100,21 @@ function validate(lastname, firstname1, pet){
     return b;
 }
 function formtThings(){
-        const form=document.getElementById("form");
-        form.addEventListener("submit", function(e){
-            e.preventDefault();
-            if(validate(document.getElementById("lastname"), document.getElementById("firstname1"), document.getElementById("pet"))){
-                array.push({
-                    lastname: document.getElementById("lastname").value,
-                    firstname1: document.getElementById("firstname1").value,
-                    firstname2: document.getElementById("firstname2").value===""?undefined:document.getElementById("firstname2").value,
-                    married: document.getElementById("married").checked,
-                    pet: document.getElementById("pet").value
-                })
-                console.log(array);
-            }
-            feltolt();
-        })
-    }
+    const form=document.getElementById("form");
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        if(validate(document.getElementById("lastname"), document.getElementById("firstname1"), document.getElementById("pet"))){
+            array.push({
+                lastname: document.getElementById("lastname").value,
+                firstname1: document.getElementById("firstname1").value,
+                firstname2: document.getElementById("firstname2").value===""?undefined:document.getElementById("firstname2").value,
+                married: document.getElementById("married").checked,
+                pet: document.getElementById("pet").value
+            })
+            console.log(array);
+        }
+        feltolt();
+        form.reset();
+    })
+    
+}
